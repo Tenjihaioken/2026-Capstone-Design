@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4aff206408f8f4d963debef2ecafec, type: 3}
+  m_Name: CombatRoom_medium_02
+  m_EditorClassIdentifier: Assembly-CSharp::RoomData
+  type: 0
+  size: {x: 0, y: 0}
+  doorPositions: []
+  roomPrefab: {fileID: 7515305839774734344, guid: 5bfa9c0b6b6a49e4aa8f34381d31a10d, type: 3}
