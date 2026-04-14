@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4aff206408f8f4d963debef2ecafec, type: 3}
+  m_Script: {fileID: 11500000, guid: 29752168aa050f543a2c61c0174334b3, type: 3}
   m_Name: CombatRoom_Medium_01
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
-  type: 1
-  size: {x: 15, y: 15}
-  doorPositions:
-  - {x: 7, y: 14}
+  type: 0
+  size: {x: 0, y: 0}
+  doorPositions: []
   roomPrefab: {fileID: 3363171497980372749, guid: 708418dc579787d449bc482c095eef01, type: 3}
