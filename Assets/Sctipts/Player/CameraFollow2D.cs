@@ -4,7 +4,7 @@ public class CameraFollow2D : MonoBehaviour
 {
     [Header("따라갈 대상")]
     public Transform target;
-    public PlayerAim playerAim;
+    public PlayerCore playerCore;
 
     [Header("기본 위치 설정")]
     public Vector3 baseOffset = new Vector3(0f, 0f, -10f);
@@ -22,7 +22,7 @@ public class CameraFollow2D : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target == null || playerAim == null)
+        if (target == null || playerCore == null)
             return;
 
         FollowTarget();
@@ -31,7 +31,7 @@ public class CameraFollow2D : MonoBehaviour
 
     private void FollowTarget()
     {
-        Vector2 aimDir = playerAim.AimDirection;
+        Vector2 aimDir = playerCore.AimDirection;
 
         Vector3 lookAheadOffset = new Vector3(
             aimDir.x * lookAheadDistance,
@@ -61,11 +61,8 @@ public class CameraFollow2D : MonoBehaviour
             return;
         }
 
-        Vector2 aimDir = playerAim.AimDirection;
+        Vector2 aimDir = playerCore.AimDirection;
 
-        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-
-        // 회전량을 너무 크게 주지 않기 위해 -1~1 범위 느낌으로 축소
         float normalized = Mathf.Clamp(aimDir.x, -1f, 1f);
         float zRotation = -normalized * maxRotateAngle;
 

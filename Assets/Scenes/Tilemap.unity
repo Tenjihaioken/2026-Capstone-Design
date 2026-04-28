@@ -153,11 +153,6 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 3
   m_ColliderType: 1
---- !u!1 &520361766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6772873231199525210, guid: ff0eba846feed464a90967127c9a1494, type: 3}
-  m_PrefabInstance: {fileID: 937302138}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &752423184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,10 +289,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6772873231199525210, guid: ff0eba846feed464a90967127c9a1494, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2002456720}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff0eba846feed464a90967127c9a1494, type: 3}
 --- !u!1 &1080775408
 GameObject:
@@ -1170,46 +1162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922dadc4029cee74bb31a2461932be94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow2D
-  target: {fileID: 2002456719}
-  playerAim: {fileID: 2002456726}
+  target: {fileID: 0}
+  playerCore: {fileID: 0}
   baseOffset: {x: 0, y: 0, z: -10}
   smoothTime: 0.2
   lookAheadDistance: 2
   useRotation: 0
   maxRotateAngle: 8
   rotateSmoothSpeed: 8
---- !u!4 &2002456719 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5201097196080967248, guid: ff0eba846feed464a90967127c9a1494, type: 3}
-  m_PrefabInstance: {fileID: 937302138}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2002456720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520361766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0209ee676fec6eb488d46b9b01ac3761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeapon
-  weaponName: "\uAE30\uBCF8 \uAC80"
-  upgradeLevel: 0
-  maxUpgradeLevel: 5
-  attackIncreasePerUpgrade: 1
---- !u!114 &2002456726 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7819645437134208201, guid: ff0eba846feed464a90967127c9a1494, type: 3}
-  m_PrefabInstance: {fileID: 937302138}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520361766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cd546f8634eede4896617a1f50a1c06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAim
 --- !u!1001 &1410233024152850580
 PrefabInstance:
   m_ObjectHideFlags: 0

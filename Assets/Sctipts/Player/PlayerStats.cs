@@ -2,17 +2,23 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [Header("기본 능력치")]
+    [Header("이동")]
     public float moveSpeed = 5f;
+
+    [Header("구르기")]
     public float dashSpeed = 12f;
     public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
 
-    [Header("전투 능력치")]
+    [Header("전투")]
     public int maxHp = 10;
     public int currentHp = 10;
     public int attackPower = 1;
-    public float dashCooldown = 1f;
-    public bool isInvincible = false;
+    public float fireRate = 2f;
+    public float projectileSpeed = 12f;
+
+    [Header("피격")]
+    public float damageInvincibleDuration = 0.5f;
 
     [Header("재화")]
     public int coin = 0;
@@ -25,6 +31,7 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
+
         if (currentHp <= 0)
         {
             currentHp = 0;
@@ -56,6 +63,5 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         Debug.Log("플레이어 사망");
-        // 나중에 게임오버 처리 연결
     }
 }

@@ -7,6 +7,9 @@ public class Projectile : MonoBehaviour
     public float lifeTime = 2f;
     public int damage = 1;
 
+    [Header("히트 이펙트")]
+    public GameObject hitEffectPrefab;
+
     private Vector2 moveDirection;
 
     public void Initialize(Vector2 direction, int attackDamage, float projectileSpeed)
@@ -29,13 +32,23 @@ public class Projectile : MonoBehaviour
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
+            SpawnHitEffect();
             Destroy(gameObject);
             return;
         }
 
         if (other.CompareTag("Wall"))
         {
+            SpawnHitEffect();
             Destroy(gameObject);
+        }
+    }
+
+    private void SpawnHitEffect()
+    {
+        if (hitEffectPrefab != null)
+        {
+            Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
         }
     }
 }
