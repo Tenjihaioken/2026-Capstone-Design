@@ -15,11 +15,7 @@ public class HeartUIManager : MonoBehaviour
     private void Start()
     {
         InitHearts();
-    }
-
-    private void Update()
-    {
-        UpdateHearts();
+        Refresh();
     }
 
     private void InitHearts()
@@ -32,11 +28,11 @@ public class HeartUIManager : MonoBehaviour
         }
     }
 
-    private void UpdateHearts()
+    public void Refresh()
     {
         for (int i = 0; i < hearts.Count; i++)
         {
-            hearts[i].enabled = (i < playerStats.currentHp);
+            hearts[i].enabled = i < playerStats.currentHp;
         }
     }
 }

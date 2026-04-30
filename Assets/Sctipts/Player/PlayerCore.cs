@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerStats))]
-public class PlayerCore : MonoBehaviour
+public class PlayerCore : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
     private PlayerStats stats;
@@ -221,17 +221,19 @@ public class PlayerCore : MonoBehaviour
     }
 
     public void TakeDamage(int damage)
-    {
-        if (isDamageInvincible || isDashing)
-            return;
+{
+    if (isDamageInvincible || isDashing)
+        return;
 
-        stats.TakeDamage(damage);
+    stats.TakeDamage(damage);
 
-        if (stats.currentHp <= 0)
-            return;
+    UIManager.Instance?.RefreshHealthUI();
 
-        StartCoroutine(DamageInvincibleCoroutine());
-    }
+    if (stats.currentHp <= 0)
+        return;
+
+    StartCoroutine(DamageInvincibleCoroutine());
+}
 
     private IEnumerator DamageInvincibleCoroutine()
     {

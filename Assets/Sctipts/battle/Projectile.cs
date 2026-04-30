@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [Header("총알 설정")]
     public float speed = 12f;
     public float lifeTime = 2f;
     public int damage = 1;
-
-    [Header("히트 이펙트")]
     public GameObject hitEffectPrefab;
 
     private Vector2 moveDirection;
@@ -28,12 +25,17 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        EnemyDummy enemy = other.GetComponent<EnemyDummy>();
-        if (enemy != null)
+        if (other.CompareTag("Enemy"))
         {
-            enemy.TakeDamage(damage);
-            SpawnHitEffect();
-            Destroy(gameObject);
+            IDamageable damageable = other.GetComponent<IDamageable>();
+
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+                SpawnHitEffect();
+                Destroy(gameObject);
+            }
+
             return;
         }
 

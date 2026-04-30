@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyDummy : MonoBehaviour
+public class EnemyDummy : MonoBehaviour, IDamageable
 {
     public int hp = 5;
     public int contactDamage = 1;

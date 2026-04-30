@@ -6,19 +6,27 @@ public class EnemyDamage : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        PlayerCore player = collision.gameObject.GetComponent<PlayerCore>();
-        if (player != null)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            player.TakeDamage(damage);
+            IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+            }
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        PlayerCore player = other.GetComponent<PlayerCore>();
-        if (player != null)
+        if (other.CompareTag("Player"))
         {
-            player.TakeDamage(damage);
+            IDamageable damageable = other.GetComponent<IDamageable>();
+
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+            }
         }
     }
 }
