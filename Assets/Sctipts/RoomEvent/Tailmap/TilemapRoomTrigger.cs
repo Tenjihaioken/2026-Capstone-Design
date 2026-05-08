@@ -1,10 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class RoomTrigger : MonoBehaviour
+public class TilemapRoomTrigger : MonoBehaviour
 {
-    [Header("연결할 룸 스포너")]
-    [SerializeField] private MonsterRoomSpawner roomSpawner;
+    public TilemapMonsterSpawner spawner;
 
     private bool triggered = false;
 
@@ -16,8 +15,6 @@ public class RoomTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("무언가 RoomTrigger에 들어옴: " + other.name);
-
         if (triggered)
             return;
 
@@ -26,15 +23,13 @@ public class RoomTrigger : MonoBehaviour
 
         triggered = true;
 
-        Debug.Log("플레이어가 방에 입장함. 몬스터 스폰 실행");
-
-        if (roomSpawner != null)
+        if (spawner != null)
         {
-            roomSpawner.SpawnMonsters();
+            spawner.SpawnMonsters();
         }
         else
         {
-            Debug.LogWarning("RoomSpawner가 연결되지 않았습니다.");
+            Debug.LogWarning("TilemapMonsterSpawner가 연결되지 않았습니다.");
         }
     }
 }

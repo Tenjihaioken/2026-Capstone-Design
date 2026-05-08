@@ -315,7 +315,7 @@ MonoBehaviour:
   moveSpeed: 2
   attackDistance: 6
   retreatDistance: 3
-  attackPattern: 2
+  attackPattern: 1
   projectilePrefab: {fileID: 3466348584312443406, guid: b785f5f267e175b4ba95444d161bbb46, type: 3}
   firePoint: {fileID: 9179820112304867256}
   attackCooldown: 2
