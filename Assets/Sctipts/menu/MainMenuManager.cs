@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("씬 이름")]
-    public string gameSceneName = "GameScene";
+    public string gameSceneName = "PlayerDebugScene";
 
     [Header("환경설정 패널")]
     public GameObject settingsPanel;
@@ -12,23 +12,27 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         if (settingsPanel != null)
-        {
             settingsPanel.SetActive(false);
-        }
     }
 
     public void StartNewGame()
     {
         PlayerPrefs.DeleteKey("HasSaveData");
 
-        SceneManager.LoadScene(gameSceneName);
+        if (SceneFadeManager.Instance != null)
+            SceneFadeManager.Instance.FadeOutAndLoadScene(gameSceneName);
+        else
+            SceneManager.LoadScene(gameSceneName);
     }
 
     public void ContinueGame()
     {
         if (PlayerPrefs.HasKey("HasSaveData"))
         {
-            SceneManager.LoadScene(gameSceneName);
+            if (SceneFadeManager.Instance != null)
+                SceneFadeManager.Instance.FadeOutAndLoadScene(gameSceneName);
+            else
+                SceneManager.LoadScene(gameSceneName);
         }
         else
         {
@@ -39,17 +43,13 @@ public class MainMenuManager : MonoBehaviour
     public void OpenSettings()
     {
         if (settingsPanel != null)
-        {
             settingsPanel.SetActive(true);
-        }
     }
 
     public void CloseSettings()
     {
         if (settingsPanel != null)
-        {
             settingsPanel.SetActive(false);
-        }
     }
 
     public void QuitGame()
