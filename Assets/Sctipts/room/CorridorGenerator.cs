@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 public class CorridorGenerator : MonoBehaviour
 {
     public Tilemap floorTilemap;
-    public TileBase floorTile; // 주원 님이 만든 중세 벽돌 타일 
+    public TileBase floorTile;
     public int corridorWidth = 2; // 복도 두께 (2~3 권장)
 
     // 두 지점 사이의 'ㄴ'자 복도를 그리는 함수
