@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class RoomCombatManager : MonoBehaviour
 {
     [SerializeField] private TileBase gateTile;
+    [SerializeField] private MonsterRoomSpawner roomSpawner;
 
     private List<RoomInstance> rooms;
     private Tilemap floorMap, wallMap;
@@ -70,12 +71,16 @@ public class RoomCombatManager : MonoBehaviour
         if (currentRoom != null && currentRoom.state == RoomState.Combat)
         {
             if (Input.GetKeyDown(KeyCode.K)) 
-            {
-                EndCombat(currentRoom);
-            }
+        {
+            EndCombat(currentRoom);
+        }
+        // 조건 2: 몬스터가 모두 사망했을 때 자동 종료
+        else if (roomSpawner != null && roomSpawner.GetAliveMonsterCount() == 0)
+        {
+            EndCombat(currentRoom);
+        }
         }
     }
-
     private void StartCombat(RoomInstance room)
 {
     room.state = RoomState.Combat;
@@ -86,7 +91,13 @@ public class RoomCombatManager : MonoBehaviour
         // 그리드 좌표를 타일맵 좌표로 변환하여 벽 타일 배치
         wallMap.SetTile(GridToTilemapPos(pos), gateTile);
     }
-    Debug.Log("전투 시작, 문이 닫혔습니다.");
+
+    // 몬스터 스폰 연동
+    if (roomSpawner != null)
+    {
+        roomSpawner.SpawnMonstersInRoom(room.rect, mapSize.x, mapSize.y);
+    }
+    Debug.Log($"{room.roomName}전투 시작, 문이 닫혔습니다.");
 }
 
     private void EndCombat(RoomInstance room)
@@ -101,6 +112,12 @@ public class RoomCombatManager : MonoBehaviour
             wallMap.SetTile(tilePos, null);
         }
 
+        // 다음 방 전투를 위해 스포너의 내부 상태 리스트를 정리
+        if (roomSpawner != null)
+        {
+        
+        roomSpawner.ClearSpawnedList(); 
+        }
         Debug.Log("전투 종료, 문이 열렸습니다.");
     }
 
