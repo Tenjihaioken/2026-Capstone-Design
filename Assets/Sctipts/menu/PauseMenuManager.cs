@@ -89,4 +89,13 @@ public class PauseMenuManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+    public void SaveGame()
+{
+    PlayerCore player = FindFirstObjectByType<PlayerCore>();
+
+    if (player != null)
+    {
+        SaveManager.Instance?.SaveGame(player);
+    }
+}
 }

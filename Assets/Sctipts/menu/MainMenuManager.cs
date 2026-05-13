@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("씬 이름")]
-    public string gameSceneName = "PlayerDebugScene";
+    public string gameSceneName = "DungeonGenerator";
 
     [Header("환경설정 패널")]
     public GameObject settingsPanel;
@@ -17,22 +17,28 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        PlayerPrefs.DeleteKey("HasSaveData");
+        SaveManager.Instance?.DeleteSave();
 
-        if (SceneFadeManager.Instance != null)
-            SceneFadeManager.Instance.FadeOutAndLoadScene(gameSceneName);
-        else
-            SceneManager.LoadScene(gameSceneName);
+        PlayerPrefs.SetInt("LoadGame", 0);
+        PlayerPrefs.Save();
+
+        LoadScene(gameSceneName);
     }
 
     public void ContinueGame()
     {
-        if (PlayerPrefs.HasKey("HasSaveData"))
+        if (SaveManager.Instance != null && SaveManager.Instance.HasSaveData())
         {
-            if (SceneFadeManager.Instance != null)
-                SceneFadeManager.Instance.FadeOutAndLoadScene(gameSceneName);
-            else
-                SceneManager.LoadScene(gameSceneName);
+            SaveData data = SaveManager.Instance.LoadData();
+
+            PlayerPrefs.SetInt("LoadGame", 1);
+            PlayerPrefs.Save();
+
+            string sceneToLoad = string.IsNullOrEmpty(data.currentSceneName)
+                ? gameSceneName
+                : data.currentSceneName;
+
+            LoadScene(sceneToLoad);
         }
         else
         {
@@ -54,12 +60,18 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("게임 종료");
-
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
+    }
+
+    private void LoadScene(string sceneName)
+    {
+        if (SceneFadeManager.Instance != null)
+            SceneFadeManager.Instance.FadeOutAndLoadScene(sceneName);
+        else
+            SceneManager.LoadScene(sceneName);
     }
 }
