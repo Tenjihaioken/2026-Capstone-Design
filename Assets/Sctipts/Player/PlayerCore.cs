@@ -30,6 +30,9 @@ public class PlayerCore : MonoBehaviour, IDamageable
     public Color hitColor = Color.red;
     public float flashInterval = 0.05f;
 
+    [Header("애니메이션")]
+    public Animator animator;
+
     private Vector2 moveInput;
     private Vector2 aimDirection = Vector2.right;
     private Vector2 lastMoveDirection = Vector2.down;
@@ -63,6 +66,9 @@ public class PlayerCore : MonoBehaviour, IDamageable
 
         if (visualTarget == null)
             visualTarget = transform;
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -71,6 +77,7 @@ public class PlayerCore : MonoBehaviour, IDamageable
         UpdateAim();
         UpdateLookRotation();
         UpdateFirePoint();
+        UpdateMoveSpriteRotation();
 
         HandleDashInput();
         HandleShootInput();
@@ -80,6 +87,16 @@ public class PlayerCore : MonoBehaviour, IDamageable
     private void FixedUpdate()
     {
         HandleMovement();
+    }
+
+    private void UpdateMoveSpriteRotation()
+    {
+        if (spriteRenderer == null)
+            return;
+
+        Vector2 dir = moveInput != Vector2.zero ? moveInput : lastMoveDirection;
+        spriteRenderer.transform.localRotation = Quaternion.identity;
+        spriteRenderer.flipX = dir.x < 0f;
     }
 
     private void HandleInput()
@@ -98,6 +115,9 @@ public class PlayerCore : MonoBehaviour, IDamageable
         if (canMove && !isDashing)
         {
             rb.linearVelocity = moveInput * stats.moveSpeed;
+
+            if (animator != null)
+                animator.SetBool("isWalking", moveInput != Vector2.zero && canMove && !isDashing);
         }
     }
 
@@ -161,10 +181,16 @@ public class PlayerCore : MonoBehaviour, IDamageable
         canMove = false;
         lastDashTime = Time.time;
 
+        if (animator != null)
+            animator.SetBool("isRolling", true);
+
         Vector2 dashDirection = moveInput != Vector2.zero ? moveInput : lastMoveDirection;
         rb.linearVelocity = dashDirection.normalized * stats.dashSpeed;
 
         yield return new WaitForSeconds(stats.dashDuration);
+
+        if (animator != null)
+            animator.SetBool("isRolling", false);
 
         rb.linearVelocity = Vector2.zero;
         isDashing = false;

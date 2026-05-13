@@ -5590,6 +5590,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4540246920194533238, guid: ff0eba846feed464a90967127c9a1494, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8793639957104055765, guid: c9f431b1efdfcc74998e32b576b11f24, type: 3}
     - target: {fileID: 6645654656692211595, guid: ff0eba846feed464a90967127c9a1494, type: 3}
       propertyPath: playerTransform
       value: 
@@ -5618,6 +5622,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9074570664569912108, guid: ff0eba846feed464a90967127c9a1494, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.203125
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074570664569912108, guid: ff0eba846feed464a90967127c9a1494, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.1640625
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5625,6 +5637,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3379630059269617850, guid: ff0eba846feed464a90967127c9a1494, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2117424466060365465}
+    - targetCorrespondingSourceObject: {fileID: 3379630059269617850, guid: ff0eba846feed464a90967127c9a1494, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2117424466060365466}
   m_SourcePrefab: {fileID: 100100000, guid: ff0eba846feed464a90967127c9a1494, type: 3}
 --- !u!4 &2117424466060365462 stripped
 Transform:
@@ -5666,6 +5681,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   interactKey: 102
+--- !u!95 &2117424466060365466
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162981089}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fddb3791254b4e941aa131e9e8f56d1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &4657179051061193521
 PrefabInstance:
   m_ObjectHideFlags: 0
