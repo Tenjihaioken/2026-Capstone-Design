@@ -13,6 +13,7 @@ public class EnemyRangedAI : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Transform player;
+    private EnemyStatus status;
 
     [Header("이동 설정")]
     public float moveSpeed = 2f;
@@ -52,6 +53,7 @@ public class EnemyRangedAI : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        status = GetComponent<EnemyStatus>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -63,7 +65,22 @@ public class EnemyRangedAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player == null || isPreparingAttack)
+        if (player == null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (status != null && status.IsFrozen)
+        {
+            rb.linearVelocity = Vector2.zero;
+            HideWarningLine();
+            isPreparingAttack = false;
+            StopAllCoroutines();
+            return;
+        }
+
+        if (isPreparingAttack)
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -77,6 +94,12 @@ public class EnemyRangedAI : MonoBehaviour
         if (player == null)
             return;
 
+        if (status != null && status.IsFrozen)
+        {
+            HideWarningLine();
+            return;
+        }
+
         LookAtPlayer();
         TryAttack();
     }
@@ -86,16 +109,24 @@ public class EnemyRangedAI : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.position);
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
 
+        float speedMultiplier = 1f;
+
+        if (status != null)
+            speedMultiplier = status.SpeedMultiplier;
+
         if (distance > attackDistance)
-            rb.linearVelocity = directionToPlayer * moveSpeed;
+            rb.linearVelocity = directionToPlayer * moveSpeed * speedMultiplier;
         else if (distance < retreatDistance)
-            rb.linearVelocity = -directionToPlayer * moveSpeed;
+            rb.linearVelocity = -directionToPlayer * moveSpeed * speedMultiplier;
         else
             rb.linearVelocity = Vector2.zero;
     }
 
     private void TryAttack()
     {
+        if (status != null && status.IsFrozen)
+            return;
+
         if (isPreparingAttack)
             return;
 
@@ -121,6 +152,13 @@ public class EnemyRangedAI : MonoBehaviour
 
         yield return new WaitForSeconds(attackDelay);
 
+        if (status != null && status.IsFrozen)
+        {
+            HideWarningLine();
+            isPreparingAttack = false;
+            yield break;
+        }
+
         HideWarningLine();
 
         switch (attackPattern)
@@ -144,6 +182,9 @@ public class EnemyRangedAI : MonoBehaviour
 
     private void Shoot(Vector2 direction)
     {
+        if (status != null && status.IsFrozen)
+            return;
+
         if (projectilePrefab == null || firePoint == null)
             return;
 
@@ -163,6 +204,9 @@ public class EnemyRangedAI : MonoBehaviour
     {
         for (int i = 0; i < burstCount; i++)
         {
+            if (status != null && status.IsFrozen)
+                yield break;
+
             Shoot(direction);
             yield return new WaitForSeconds(burstInterval);
         }
@@ -170,6 +214,9 @@ public class EnemyRangedAI : MonoBehaviour
 
     private void SpreadShot(Vector2 centerDirection)
     {
+        if (status != null && status.IsFrozen)
+            return;
+
         if (spreadCount <= 1)
         {
             Shoot(centerDirection);

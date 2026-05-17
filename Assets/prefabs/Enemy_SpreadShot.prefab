@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 2699101301621001944}
   - component: {fileID: 4212002076675424793}
   - component: {fileID: 1808684982399597661}
+  - component: {fileID: -516101871780462582}
   m_Layer: 0
   m_Name: Enemy_SpreadShot
   m_TagString: Enemy
@@ -331,3 +332,15 @@ MonoBehaviour:
   warningWidth: 0.08
   rotateToPlayer: 1
   rotationOffset: 0
+--- !u!114 &-516101871780462582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103032414193856455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5dd5cc355fe1749bd27f885902f9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus

@@ -12,9 +12,12 @@ public class EnemyDummy : MonoBehaviour, IDamageable
     public float hitFlashDuration = 0.08f;
 
     private Color originalColor;
+    private EnemyDrop enemyDrop;
 
     private void Awake()
     {
+        enemyDrop = GetComponent<EnemyDrop>();
+
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -48,6 +51,11 @@ public class EnemyDummy : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (enemyDrop != null)
+        {
+            enemyDrop.Drop();
+        }
+
         Debug.Log($"{gameObject.name} 사망");
         Destroy(gameObject);
     }

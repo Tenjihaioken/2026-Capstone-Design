@@ -242,7 +242,12 @@ public class PlayerCore : MonoBehaviour, IDamageable
     {
         if (Input.GetKeyDown(itemUseKey))
         {
-            Debug.Log("아이템 사용 키 입력");
+            PlayerInventory inventory = GetComponent<PlayerInventory>();
+
+            if (inventory != null)
+            {
+                inventory.UseCurrentItem(gameObject);
+            }
         }
     }
 

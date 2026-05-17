@@ -31,7 +31,17 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player == null) return;
+        if (player == null)
+            return;
+
+        EnemyStatus status = GetComponent<EnemyStatus>();
+
+        // 빙결 상태면 아무 행동도 못함
+        if (status != null && status.IsFrozen)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
 
         float distance = Vector2.Distance(transform.position, player.position);
 
@@ -49,7 +59,17 @@ public class EnemyAI : MonoBehaviour
     private void MoveTowardsPlayer()
     {
         Vector2 direction = (player.position - transform.position).normalized;
-        rb.linearVelocity = direction * moveSpeed;
+
+        float speedMultiplier = 1f;
+
+        EnemyStatus status = GetComponent<EnemyStatus>();
+
+        if (status != null)
+        {
+            speedMultiplier = status.SpeedMultiplier;
+        }
+
+        rb.linearVelocity = direction * moveSpeed * speedMultiplier;
     }
 
     private void TryAttack()

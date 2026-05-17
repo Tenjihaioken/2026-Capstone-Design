@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 2443921177283100851}
   - component: {fileID: 1788745357784628930}
   - component: {fileID: 690260751946957798}
+  - component: {fileID: 4486373362728133738}
   m_Layer: 0
   m_Name: Enemy_BurstShot
   m_TagString: Enemy
@@ -331,3 +332,15 @@ MonoBehaviour:
   warningWidth: 0.08
   rotateToPlayer: 1
   rotationOffset: 0
+--- !u!114 &4486373362728133738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5573852840942679438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5dd5cc355fe1749bd27f885902f9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
